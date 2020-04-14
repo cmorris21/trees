@@ -6,7 +6,7 @@ It is crucial to get these implemented correctly in order to be able to implemen
 class Stack(object):
     def __init__(self):
         self.items = []
-
+ 
     def __len__(self):
         return self.size()
      
