@@ -231,7 +231,7 @@ class BST(BinaryTree):
         Given a list xs, remove each element of xs from self.
         FIXME:
         Implement this function.
-        ''
+        '''
         for elements in xs:
             self.remove(elements)
 #collab with Yusuf Ismaeel
