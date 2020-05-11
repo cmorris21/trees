@@ -8,7 +8,6 @@ from Trees.BST import BST
 
 class AVLTree(BST):
     '''
-    FIXME:
     AVLTree is currently not a subclass of BST.
     You should make the necessary changes in the class declaration line above 
     and in the constructor below.
@@ -16,9 +15,9 @@ class AVLTree(BST):
 
     def __init__(self, xs=None):
         '''
-        FIXME:
         Implement this function.
         '''
+        super().__init__()
         self.root = None
         if xs:
             self.insert_list(xs)
@@ -48,7 +47,6 @@ class AVLTree(BST):
     @staticmethod
     def _is_avl_satisfied(node):
         '''
-        FIXME:
         Implement this function.
         '''
         if node is None:
@@ -60,7 +58,6 @@ class AVLTree(BST):
     @staticmethod
     def _left_rotate(node):
         '''
-        FIXME:
         Implement this function.
         The lecture videos provide a high-level overview of tree rotations,
         and the textbook provides full python code.
@@ -85,7 +82,6 @@ class AVLTree(BST):
     @staticmethod
     def _right_rotate(node):
         '''
-        FIXME:
         Implement this function.
         The lecture videos provide a high-level overview of tree rotations,
         and the textbook provides full python code.
@@ -111,7 +107,6 @@ class AVLTree(BST):
             self.insert(item)
     def insert(self, value):
         '''
-        FIXME:
         Implement this function.
         The lecture videos provide a high-level overview of how to insert into an AVL tree,
         and the textbook provides full python code.
@@ -126,9 +121,7 @@ class AVLTree(BST):
             self.root = Node(value)
         else:
             self.root = AVLTree._insert(value,self.root)
-
-       
-    
+            
     @staticmethod
     def updateBalance(node):
         if AVLTree._balance_factor(node) > 1:
@@ -145,8 +138,6 @@ class AVLTree(BST):
                 return AVLTree._left_rotate(node)
         else: return node
   
-
-    
     @staticmethod
     def _insert(value,node):
         if value < node.value:
@@ -162,10 +153,9 @@ class AVLTree(BST):
         else:
             print("Already in the tree")
             
-      
         if AVLTree._is_avl_satisfied(node) == False:  
-            node.left = AVLTree.updateBalance(node.left)
+            node.left = AVLTree.updateBalance(node.left) 
             node.right = AVLTree.updateBalance(node.right) 
-            return AVLTree.updateBalance(node)   
+            return AVLTree.updateBalance(node)     
         else:
             return node
