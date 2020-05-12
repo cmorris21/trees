@@ -1,6 +1,3 @@
-'''
-'''
-
 from Trees.BinaryTree import BinaryTree, Node
 
 class Heap(BinaryTree):
@@ -57,12 +54,16 @@ class Heap(BinaryTree):
         The lecture videos have the exact code you need,
         except that their method is an instance method when it should have been a static method.
         '''
-        if node is None or (node.left is None and node.right is None):
+        left = True
+        right = True
+        if node is None:
             return True
-        if node.right is None:
-            return node.value <= node.left.value
-        if node.value <= node.left.value and node.value <= node.right.value:
-            return Heap._is_heap_satisfied(node.left) and Heap._is_heap_satisfied(node.right)
+        if node.left:
+            left = node.value <= node.left.value and Heap._is_heap_satisfied(node.left)
+        if node.right:
+            right = node.value <= node.right.value and Heap._is_heap_satisfied(node.right)
+      
+        return left and right
         
     def insert(self, value):
         '''
@@ -72,7 +73,7 @@ class Heap(BinaryTree):
             self.root = Node(value)
             self.root.descendents = 1
         else:
-            Heap._insert(self.root, value)
+            self.root = Heap._insert(self.root, value)
 
 
     @staticmethod
@@ -81,11 +82,12 @@ class Heap(BinaryTree):
         FIXME:
         Implement this function.
         '''
+        if node is None:
+            return
         if node.left and node.right:
-            node.left = Heap._insert(node.left,value)
+            node.left = Heap._insert(node.left, value)
             if node.value > node.left.value:
                 return Heap._upHeapBubble(node,value)
-
         if node.left is None:
             node.left = Node(value)
             if node.value > node.left.value:
@@ -94,7 +96,7 @@ class Heap(BinaryTree):
             node.right = Node(value)
             if node.value > node.right.value:
                 return Heap._upHeapBubble(node,value)
-        
+  
         return node
     
                
@@ -196,7 +198,7 @@ class Heap(BinaryTree):
                 node.value = temp2
                 node.left.value = temp1
         if node.right:
-            if node.right == value:
+            if node.right.value == value:
                 temp1 = node.value
                 temp2 = node.right.value
                 node.value = temp2
